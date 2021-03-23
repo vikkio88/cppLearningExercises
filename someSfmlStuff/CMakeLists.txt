@@ -15,6 +15,8 @@ include_directories(
 
 set(APP_SOURCES 
   src/main.cpp
+  src/GameState.cpp
+  src/helpers.cpp
 )
 
 # creates ./build/bin/someStuff
