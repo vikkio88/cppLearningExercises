@@ -1,62 +1,15 @@
+#include "eventDispatcher/EventDispatcher.hpp"
+
 #include <iostream>
-#include <string>
-#include <vector>
-#include <thread>
-#include <future>
 #include <functional>
 #include <chrono>
+#include <vector>
+#include <future>
 #include <random>
-#include <map>
 
 using namespace std::chrono_literals;
 
-class Event
-{
-private:
-    std::string m_Name;
-
-public:
-    Event(std::string name) : m_Name(name) {}
-    std::string getName() const
-    {
-        return m_Name;
-    }
-};
-static std::mutex subMutex;
-
-class EventDispatcher
-{
-private:
-    std::map<std::string, std::vector<std::function<void()>>> m_Listeners;
-    std::map<std::string, int> m_CallCounts;
-
-public:
-    void dispatch(Event event)
-    {
-        auto subs = m_Listeners.find(event.getName());
-        if (subs != m_Listeners.end())
-        {
-            m_CallCounts[event.getName()] += 1;
-            std::cout << event.getName() << " been called " << m_CallCounts[event.getName()] << "times\n";
-            for (auto &func : subs->second)
-                func();
-        }
-    }
-
-    void addListener(const char *eventName, const std::function<void()> &callback)
-    {
-        std::lock_guard<std::mutex> lock(subMutex);
-        m_CallCounts[eventName] = 0;
-        m_Listeners[eventName].push_back(callback);
-    }
-
-    ~EventDispatcher()
-    {
-        std::cout << "Destroying" << std::endl;
-    }
-};
-
-static EventDispatcher dispatcher;
+static ed::EventDispatcher dispatcher;
 
 void generateEvent(int threadNum)
 {
@@ -67,7 +20,7 @@ void generateEvent(int threadNum)
     std::cout << "t: " << threadNum << " , waiting for " << wait << " secs" << std::endl;
     std::this_thread::sleep_for(std::chrono::seconds(wait));
     std::cout << "t: " << threadNum << " generating " << event << " event" << std::endl;
-    dispatcher.dispatch(Event(event));
+    dispatcher.dispatch(ed::Event(event));
 }
 
 int main()
