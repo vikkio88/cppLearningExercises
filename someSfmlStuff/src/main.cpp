@@ -9,7 +9,7 @@
 int main()
 {
 
-    Game game;
+    Game game("Test");
     game.run();
 
     return EXIT_SUCCESS;

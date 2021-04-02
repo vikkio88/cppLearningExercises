@@ -1,14 +1,18 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include "Window.hpp"
+
+#include <vector>
 
 class Game
 {
 private:
-    sf::RenderWindow m_Window;
+    Window m_Window;
+    //std::vector<Scene> m_Scenes;
 
 public:
     Game();
+    Game(const std::string &name);
 
     void run();
 };

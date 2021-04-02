@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 
-Game::Game() : m_Window(sf::VideoMode(800, 600), "Test")
+Game::Game(const std::string &name) : m_Window(name, 800, 600)
 {
 }
 
@@ -15,17 +15,12 @@ void Game::run()
 
     while (m_Window.isOpen())
     {
-        sf::Event event;
         auto lines = *(gameState->lines);
         auto shapes = *(gameState->shapes);
+        auto event = m_Window.getEvent();
+        handleEvent(event);
 
-        while (m_Window.pollEvent(event))
-        {
-            handleEvent(event, m_Window);
-        }
-
-        m_Window.clear(sf::Color::Black);
-
+        m_Window.startDraw();
         for (auto &s : shapes)
         {
             m_Window.draw(*s);
@@ -35,7 +30,6 @@ void Game::run()
         {
             m_Window.draw(*l);
         }
-
-        m_Window.display();
+        m_Window.endDraw();
     }
 }
