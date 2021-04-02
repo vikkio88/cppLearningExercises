@@ -2,6 +2,7 @@
 #include "GameState.hpp"
 #include "helpers.hpp"
 
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
 Game::Game(const std::string &name) : m_Window(name, 800, 600)
@@ -15,10 +16,15 @@ void Game::run()
 
     while (m_Window.isOpen())
     {
+        auto dt = m_Clock.restart().asSeconds();
+        std::cout << "FPS: " << 1 / dt << std::endl;
+
+        auto event = m_Window.getEvent();
+        auto mousePos = m_Window.getMousePosition();
+        handleEvent(event, mousePos);
+
         auto lines = *(gameState->lines);
         auto shapes = *(gameState->shapes);
-        auto event = m_Window.getEvent();
-        handleEvent(event);
 
         m_Window.startDraw();
         for (auto &s : shapes)

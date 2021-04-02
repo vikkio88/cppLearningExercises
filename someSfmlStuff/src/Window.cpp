@@ -1,8 +1,9 @@
 #include "Window.hpp"
 
 Window::Window(const std::string &title, int widht, int height)
-    : m_Window(sf::VideoMode(800, 600), "Test", sf::Style::None || sf::Style::Fullscreen)
+    : m_Window(sf::VideoMode(800, 600), "Test", sf::Style::Titlebar /*sf::Style::None | sf::Style::Fullscreen*/)
 {
+    m_Window.setVerticalSyncEnabled(true);
 }
 
 bool Window::isOpen()
@@ -26,6 +27,13 @@ sf::Event Window::getEvent()
 
         return event;
     }
+
+    return event;
+}
+
+sf::Vector2i Window::getMousePosition()
+{
+    return sf::Mouse::getPosition(m_Window);
 }
 
 void Window::startDraw()

@@ -8,6 +8,7 @@ class Game
 {
 private:
     Window m_Window;
+    sf::Clock m_Clock;
     //std::vector<Scene> m_Scenes;
 
 public:

@@ -25,7 +25,7 @@ void addLine(Lines &lines, sf::Vector2f p1, sf::Vector2f p2)
     lines.push_back(line);
 }
 
-void handleEvent(sf::Event &event)
+void handleEvent(sf::Event &event, sf::Vector2i &mousePos)
 {
 
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space)
@@ -36,18 +36,14 @@ void handleEvent(sf::Event &event)
         std::cout << "Lines: " << lines->size() << std::endl
                   << "Shapes: " << shapes->size() << std::endl;
     }
-
-    /* position on a window might be moved to window
     else if (event.type == sf::Event::MouseButtonReleased && event.key.code == sf::Mouse::Left)
     {
         auto shapes = GameState::getInstance()->shapes;
         auto lines = GameState::getInstance()->lines;
 
-        auto pos = sf::Mouse::getPosition(window);
-        addCircle(*shapes, pos);
+        addCircle(*shapes, mousePos);
         addLink(shapes, lines);
     }
-    */
 }
 
 void addLink(Shapes *shapes, Lines *lines)
