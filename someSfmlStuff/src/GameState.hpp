@@ -5,6 +5,7 @@
 
 using Shapes = std::vector<sf::Shape *>;
 using Lines = std::vector<sf::VertexArray *>;
+using Items = std::vector<sf::Drawable *>;
 
 class GameState
 {

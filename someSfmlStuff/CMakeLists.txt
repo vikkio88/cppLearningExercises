@@ -15,6 +15,7 @@ include_directories(
 
 set(APP_SOURCES 
   src/main.cpp
+  src/Game.cpp
   src/GameState.cpp
   src/helpers.cpp
 )
