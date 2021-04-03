@@ -15,8 +15,9 @@ include_directories(
 
 set(APP_SOURCES 
   src/main.cpp
+  src/SplashScreen.cpp
+  src/SceneManager.cpp
   src/Window.cpp
-  src/Scene.cpp
   src/Game.cpp
   src/GameState.cpp
   src/helpers.cpp
