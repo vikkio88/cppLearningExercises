@@ -1,6 +1,6 @@
 #include "GameScene.hpp"
-#include "GameState.hpp"
-#include "helpers.hpp"
+#include "./state/GameState.hpp"
+#include "./libs/helpers.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <iostream>

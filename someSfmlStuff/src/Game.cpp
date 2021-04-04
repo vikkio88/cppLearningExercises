@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include "GameState.hpp"
 #include "scenes/SplashScreen.hpp"
 #include "scenes/GameScene.hpp"
 

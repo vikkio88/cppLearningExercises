@@ -18,10 +18,10 @@ set(APP_SOURCES
   src/SceneManager.cpp
   src/Window.cpp
   src/Game.cpp
-  src/GameState.cpp
-  src/scenes/helpers.cpp
   src/scenes/GameScene.cpp
   src/scenes/SplashScreen.cpp
+  src/scenes/state/GameState.cpp
+  src/scenes/libs/helpers.cpp
 )
 
 file(COPY assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})

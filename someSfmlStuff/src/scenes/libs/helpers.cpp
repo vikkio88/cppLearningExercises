@@ -2,7 +2,8 @@
 #include <iostream>
 
 #include "helpers.hpp"
-#include "GameState.hpp"
+#include "../state/GameState.hpp"
+
 const int CIRCLE_RADIUS = 5;
 void addCircle(Shapes &shapes, sf::Vector2i clickPosition)
 {
