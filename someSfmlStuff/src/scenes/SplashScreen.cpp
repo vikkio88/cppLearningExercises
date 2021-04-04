@@ -1,5 +1,6 @@
 #include "SplashScreen.hpp"
 #include "Window.hpp"
+#include "Assets.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -10,12 +11,8 @@ void SplashScreen::onCreate()
     std::cout << "creating " << m_Name << std::endl;
 
     // Loading font, might be delegated to resource singleton?
-    if (!font.loadFromFile("assets/fonts/callingcode.ttf"))
-    {
-        // something
-        std::cout << "Could not load font\n";
-    }
-    title.setFont(font);
+    auto font = Assets::getInstance()->loadFont("callingcode");
+    title.setFont(*font);
     title.setString("Press [ENTER] to start");
     title.setCharacterSize(24);
     title.setFillColor(sf::Color::White);

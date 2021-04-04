@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(someStuff)
+set(CMAKE_CXX_STANDARD 17)
+
 
 # SFML Lib installed with apt-get install sfml-dev
 find_package(SFML 2.5 COMPONENTS audio graphics window system REQUIRED)
@@ -15,6 +17,7 @@ include_directories(
 
 set(APP_SOURCES 
   src/main.cpp
+  src/Assets.cpp
   src/SceneManager.cpp
   src/Window.cpp
   src/Game.cpp

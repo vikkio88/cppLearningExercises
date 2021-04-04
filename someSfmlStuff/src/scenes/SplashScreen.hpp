@@ -11,7 +11,6 @@ class SplashScreen : public Scene
 private:
     SceneManager &m_SceneManager;
     bool m_EnterPressed = false;
-    sf::Font font;
     sf::Text title;
 
 public:
