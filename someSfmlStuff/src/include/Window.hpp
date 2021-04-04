@@ -5,7 +5,7 @@
 class Window
 {
 private:
-    sf::RenderWindow m_Window;
+    sf::RenderWindow m_Renderer;
 
 public:
     Window(const std::string &title, int width, int height);

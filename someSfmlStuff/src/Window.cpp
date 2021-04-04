@@ -1,29 +1,27 @@
 #include "Window.hpp"
 
 Window::Window(const std::string &title, int widht, int height)
-    : m_Window(sf::VideoMode(800, 600), "Test", sf::Style::Titlebar /*sf::Style::None | sf::Style::Fullscreen*/)
+    : m_Renderer(sf::VideoMode(800, 600), "Test", sf::Style::Titlebar /*sf::Style::None | sf::Style::Fullscreen*/)
 {
-    m_Window.setVerticalSyncEnabled(true);
+    m_Renderer.setVerticalSyncEnabled(true);
 }
 
 bool Window::isOpen()
 {
-    return m_Window.isOpen();
+    return m_Renderer.isOpen();
 }
 
 sf::Event Window::getEvent()
 {
     sf::Event event;
-    while (m_Window.pollEvent(event))
+    while (m_Renderer.pollEvent(event))
     {
 
         if (event.type == sf::Event::Closed)
-            m_Window.close();
+            m_Renderer.close();
 
         if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
-        {
-            m_Window.close();
-        }
+            m_Renderer.close();
 
         return event;
     }
@@ -33,20 +31,20 @@ sf::Event Window::getEvent()
 
 sf::Vector2i Window::getMousePosition()
 {
-    return sf::Mouse::getPosition(m_Window);
+    return sf::Mouse::getPosition(m_Renderer);
 }
 
 void Window::startDraw()
 {
-    m_Window.clear(sf::Color::Black);
+    m_Renderer.clear(sf::Color::Black);
 }
 
 void Window::draw(sf::Drawable &drawable)
 {
-    m_Window.draw(drawable);
+    m_Renderer.draw(drawable);
 }
 
 void Window::endDraw()
 {
-    m_Window.display();
+    m_Renderer.display();
 }
