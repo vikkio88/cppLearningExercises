@@ -36,23 +36,18 @@ void addLine(Lines &lines, sf::Vector2f p1, sf::Vector2f p2)
     lines.push_back(line);
 }
 
-void handleEvent(sf::Event &event, sf::Vector2i &mousePos, DrawMode drawMode)
+bool handleEvent(sf::Event &event, sf::Vector2i &mousePos, DrawMode drawMode)
 {
-
-    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space)
-    {
-        auto shapes = GameState::getInstance()->shapes;
-        auto lines = GameState::getInstance()->lines;
-        std::cout << "Lines: " << lines->size() << std::endl
-                  << "Shapes: " << shapes->size() << std::endl;
-    }
-    else if (event.type == sf::Event::MouseButtonReleased && event.key.code == sf::Mouse::Left)
+    if (event.type == sf::Event::MouseButtonReleased && event.key.code == sf::Mouse::Left)
     {
         auto shapes = GameState::getInstance()->shapes;
         auto lines = GameState::getInstance()->lines;
         addNode(*shapes, mousePos, drawMode);
         addLink(shapes, lines);
+        return true;
     }
+
+    return false;
 }
 
 void addLink(Shapes *shapes, Lines *lines)

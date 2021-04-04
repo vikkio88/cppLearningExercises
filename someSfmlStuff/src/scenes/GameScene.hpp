@@ -15,6 +15,7 @@ private:
     Window &m_Window;
     DrawMode m_DrawMode;
     sf::Text m_Info;
+    bool m_hasChangedState = false;
 
     std::string getInfo();
 

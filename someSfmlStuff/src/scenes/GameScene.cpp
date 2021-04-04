@@ -45,19 +45,25 @@ void GameScene::onDeactivate()
 
 void GameScene::processInput(sf::Event &event)
 {
+    m_hasChangedState = false;
     auto mousePos = m_Window.getMousePosition();
-    handleEvent(event, mousePos, m_DrawMode);
+    m_hasChangedState = handleEvent(event, mousePos, m_DrawMode);
 
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
     {
         m_DrawMode = m_DrawMode == DrawMode::CIRCLE ? DrawMode::SQUARE : DrawMode::CIRCLE;
+        m_hasChangedState = true;
     }
 }
 
 void GameScene::update(float dt)
 {
-    m_Info.setString(getInfo());
+    if (m_hasChangedState)
+    {
+        m_Info.setString(getInfo());
+    }
 }
+
 void GameScene::draw(Window &window)
 {
     auto shapes = *(GameState::getInstance()->shapes);

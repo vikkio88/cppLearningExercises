@@ -10,7 +10,6 @@ void SplashScreen::onCreate()
 {
     std::cout << "creating " << m_Name << std::endl;
 
-    // Loading font, might be delegated to resource singleton?
     auto font = Assets::getInstance()->loadFont("callingcode");
     title.setFont(*font);
     title.setString("Press [ENTER] to start");
