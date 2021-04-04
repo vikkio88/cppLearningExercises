@@ -1,6 +1,6 @@
 #include "GameState.hpp"
 
-GameState *GameState::instance = 0;
+GameState *GameState::instance = nullptr;
 
 GameState::GameState(){
     lines = new Lines();

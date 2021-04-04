@@ -1,11 +1,9 @@
-#include "SplashScreen.hpp"
-#include "Window.hpp"
+#include "GameScene.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <memory>
 
-void SplashScreen::onCreate()
+void GameScene::onCreate()
 {
     std::cout << "creating " << m_Name << std::endl;
 
@@ -15,27 +13,28 @@ void SplashScreen::onCreate()
     m_Circle->setFillColor(sf::Color::White);
     m_Circle->setPosition(100, 100);
 }
-void SplashScreen::onDestroy()
+void GameScene::onDestroy()
 {
     std::cout << "destroying " << m_Name << std::endl;
 }
 
-void SplashScreen::onActivate()
+void GameScene::onActivate()
 {
     std::cout << "activating " << m_Name << std::endl;
 }
-void SplashScreen::onDeactivate()
+void GameScene::onDeactivate()
 {
     std::cout << "deactivating " << m_Name << std::endl;
 }
 
-void SplashScreen::processInput()
+void GameScene::processInput()
 {
 }
-void SplashScreen::update(float dt)
+
+void GameScene::update(float dt)
 {
 }
-void SplashScreen::draw(Window &window)
+void GameScene::draw(Window &window)
 {
     window.draw(*m_Circle);
 }

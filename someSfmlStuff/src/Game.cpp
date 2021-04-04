@@ -1,6 +1,7 @@
 #include "Game.hpp"
 #include "GameState.hpp"
-#include "SplashScreen.hpp"
+#include "scenes/SplashScreen.hpp"
+#include "scenes/GameScene.hpp"
 
 #include <iostream>
 #include <memory>
@@ -8,9 +9,11 @@
 
 Game::Game(const std::string &name) : m_Window(name, 800, 600)
 {
-    auto splash = std::make_shared<SplashScreen>();
-
+    auto splash = std::make_shared<SplashScreen>(m_SceneManager);
     m_SceneManager.add(splash);
+
+    auto gameScene = std::make_shared<GameScene>();
+    m_SceneManager.add(gameScene);
 }
 
 void Game::run()

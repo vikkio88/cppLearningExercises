@@ -3,6 +3,7 @@
 #include "Window.hpp"
 
 #include <string>
+#include <functional>
 
 class Scene
 {
@@ -13,6 +14,7 @@ public:
     bool isActive;
     Scene(const std::string &name) : m_Name(name) {}
     std::string getName() const { return m_Name; }
+
     virtual void onCreate() = 0;
     virtual void onDestroy() = 0;
 

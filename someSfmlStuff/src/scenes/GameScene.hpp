@@ -5,18 +5,18 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
-class SplashScreen : public Scene
+class GameScene : public Scene
 {
 private:
     std::unique_ptr<sf::CircleShape> m_Circle;
 
 public:
-    SplashScreen() : Scene("splashScreen") {}
-    void onCreate() override;
-    void onDestroy() override;
+    GameScene() : Scene("game") {}
 
-    void onActivate() override;
-    void onDeactivate() override;
+    virtual void onCreate() override;
+    virtual void onDestroy() override;
+    virtual void onActivate() override;
+    virtual void onDeactivate() override;
 
     void processInput() override;
     void update(float dt) override;

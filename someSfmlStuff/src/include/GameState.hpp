@@ -16,7 +16,7 @@ public:
 public:
     static GameState *getInstance()
     {
-        if (instance == 0)
+        if (instance == nullptr)
             instance = new GameState();
         return instance;
     }
