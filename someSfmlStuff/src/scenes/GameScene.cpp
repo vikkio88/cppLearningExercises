@@ -1,6 +1,6 @@
 #include "GameScene.hpp"
-#include "./state/GameState.hpp"
-#include "./libs/helpers.hpp"
+#include "state/GameState.hpp"
+#include "libs/helpers.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -26,7 +26,13 @@ void GameScene::onDeactivate()
 void GameScene::processInput(sf::Event &event)
 {
     auto mousePos = m_Window.getMousePosition();
-    handleEvent(event, mousePos);
+    handleEvent(event, mousePos, m_DrawMode);
+
+    if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::D)
+    {
+        m_DrawMode = m_DrawMode == DrawMode::CIRCLE ? DrawMode::SQUARE : DrawMode::CIRCLE;
+        std::cout << "Changing Draw mode to " << m_DrawMode << "\n";
+    }
 }
 
 void GameScene::update(float dt)

@@ -5,14 +5,24 @@
 #include "../state/GameState.hpp"
 
 const int CIRCLE_RADIUS = 5;
-void addCircle(Shapes &shapes, sf::Vector2i clickPosition)
+void addNode(Shapes &shapes, sf::Vector2i clickPosition, DrawMode drawMode)
 {
-    auto circle = new sf::CircleShape(CIRCLE_RADIUS);
-    circle->setOrigin(CIRCLE_RADIUS, CIRCLE_RADIUS);
-    circle->setFillColor(sf::Color::White);
-    circle->setPosition(clickPosition.x, clickPosition.y);
+    sf::Shape *node = nullptr;
+    if (drawMode == DrawMode::CIRCLE)
+    {
+        node = new sf::CircleShape(CIRCLE_RADIUS);
+        node->setOrigin(CIRCLE_RADIUS, CIRCLE_RADIUS);
+    }
+    else
+    {
+        node = new sf::RectangleShape(sf::Vector2f(CIRCLE_RADIUS * 2, CIRCLE_RADIUS * 2));
+        node->setOrigin(CIRCLE_RADIUS, CIRCLE_RADIUS);
+    }
 
-    shapes.push_back(circle);
+    node->setFillColor(sf::Color::White);
+    node->setPosition(clickPosition.x, clickPosition.y);
+
+    shapes.push_back(node);
 }
 
 void addLine(Lines &lines, sf::Vector2f p1, sf::Vector2f p2)
@@ -26,12 +36,11 @@ void addLine(Lines &lines, sf::Vector2f p1, sf::Vector2f p2)
     lines.push_back(line);
 }
 
-void handleEvent(sf::Event &event, sf::Vector2i &mousePos)
+void handleEvent(sf::Event &event, sf::Vector2i &mousePos, DrawMode drawMode)
 {
 
     if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Space)
     {
-
         auto shapes = GameState::getInstance()->shapes;
         auto lines = GameState::getInstance()->lines;
         std::cout << "Lines: " << lines->size() << std::endl
@@ -41,8 +50,7 @@ void handleEvent(sf::Event &event, sf::Vector2i &mousePos)
     {
         auto shapes = GameState::getInstance()->shapes;
         auto lines = GameState::getInstance()->lines;
-
-        addCircle(*shapes, mousePos);
+        addNode(*shapes, mousePos, drawMode);
         addLink(shapes, lines);
     }
 }
