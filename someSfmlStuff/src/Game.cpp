@@ -12,7 +12,7 @@ Game::Game(const std::string &name) : m_Window(name, 800, 600)
     auto splash = std::make_shared<SplashScreen>(m_SceneManager);
     m_SceneManager.add(splash);
 
-    auto gameScene = std::make_shared<GameScene>();
+    auto gameScene = std::make_shared<GameScene>(m_Window);
     m_SceneManager.add(gameScene);
 }
 
@@ -27,7 +27,7 @@ void Game::run()
 
         if (scene != nullptr)
         {
-            scene->processInput();
+            scene->processInput(event);
             scene->update(dt);
             m_Window.startDraw();
             scene->draw(m_Window);

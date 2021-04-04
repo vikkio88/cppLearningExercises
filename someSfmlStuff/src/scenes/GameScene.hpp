@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Scene.hpp"
+#include "Window.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <memory>
@@ -8,17 +9,17 @@
 class GameScene : public Scene
 {
 private:
-    std::unique_ptr<sf::CircleShape> m_Circle;
+    Window &m_Window;
 
 public:
-    GameScene() : Scene("game") {}
+    GameScene(Window &window) : Scene("game"), m_Window(window) {}
 
     virtual void onCreate() override;
     virtual void onDestroy() override;
     virtual void onActivate() override;
     virtual void onDeactivate() override;
 
-    void processInput() override;
+    void processInput(sf::Event& event) override;
     void update(float dt) override;
     void draw(Window &window) override;
 };

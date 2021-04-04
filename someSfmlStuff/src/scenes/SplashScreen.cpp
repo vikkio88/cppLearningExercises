@@ -36,7 +36,7 @@ void SplashScreen::onDeactivate()
     std::cout << "deactivating " << m_Name << std::endl;
 }
 
-void SplashScreen::processInput()
+void SplashScreen::processInput(sf::Event &event)
 {
     m_EnterPressed = sf::Keyboard::isKeyPressed(sf::Keyboard::Enter);
 }

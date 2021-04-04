@@ -22,7 +22,7 @@ public:
     void onActivate() override;
     void onDeactivate() override;
 
-    void processInput() override;
+    void processInput(sf::Event& event) override;
     void update(float dt) override;
     void draw(Window &window) override;
 };

@@ -1,8 +1,6 @@
-
 #include <iostream>
 #include <vector>
 
-#include "helpers.hpp"
 #include "GameState.hpp"
 #include "Game.hpp"
 

@@ -21,7 +21,7 @@ public:
     virtual void onActivate(){};
     virtual void onDeactivate(){};
 
-    virtual void processInput(){};
+    virtual void processInput(sf::Event &event){};
     virtual void update(float dt){};
     virtual void draw(Window &window){};
 };

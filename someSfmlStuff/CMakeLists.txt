@@ -19,7 +19,7 @@ set(APP_SOURCES
   src/Window.cpp
   src/Game.cpp
   src/GameState.cpp
-  src/helpers.cpp
+  src/scenes/helpers.cpp
   src/scenes/GameScene.cpp
   src/scenes/SplashScreen.cpp
 )
