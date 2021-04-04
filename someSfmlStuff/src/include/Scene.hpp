@@ -2,8 +2,8 @@
 
 #include "Window.hpp"
 
-#include <string>
 #include <functional>
+#include <string>
 
 class Scene
 {
@@ -12,14 +12,14 @@ protected:
 
 public:
     bool isActive;
-    Scene(const std::string &name) : m_Name(name) {}
+    Scene(const std::string &name) : m_Name(name), isActive(false) {}
     std::string getName() const { return m_Name; }
 
     virtual void onCreate() = 0;
     virtual void onDestroy() = 0;
-
-    virtual void onActivate(){};
-    virtual void onDeactivate(){};
+    
+    virtual void onActivate() { isActive = true; };
+    virtual void onDeactivate() { isActive = false; };
 
     virtual void processInput(sf::Event &event){};
     virtual void update(float dt){};

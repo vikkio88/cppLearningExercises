@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Window.hpp"
 #include "SceneManager.hpp"
+#include "Window.hpp"
 
 #include <vector>
 

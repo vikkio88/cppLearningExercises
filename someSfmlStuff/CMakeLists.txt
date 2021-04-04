@@ -24,6 +24,18 @@ set(APP_SOURCES
   src/scenes/libs/helpers.cpp
 )
 
+# This if you want clang-tidy on build
+# it is terribly slow
+# set(CMAKE_CXX_CLANG_TIDY
+#     clang-tidy;
+#     -header-filter=.;
+#     -checks=*;)
+message("Build Type: " ${CMAKE_BUILD_TYPE})
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+  message("Setting build to show FPS")
+  add_compile_definitions(DEBUG)
+endif()
+
 file(COPY assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
 # creates ./build/bin/someStuff

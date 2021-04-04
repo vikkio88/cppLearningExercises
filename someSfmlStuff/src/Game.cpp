@@ -20,8 +20,9 @@ void Game::run()
     while (m_Window.isOpen())
     {
         auto scene = m_SceneManager.getCurrent();
-        auto dt = m_Clock.restart().asSeconds();
+        auto dt = m_Clock.restart().asSeconds();        
         //std::cout << "FPS: " << 1 / dt << std::endl;
+
         auto event = m_Window.getEvent();
 
         if (scene != nullptr)
