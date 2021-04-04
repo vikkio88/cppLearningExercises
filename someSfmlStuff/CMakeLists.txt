@@ -35,7 +35,6 @@ set(APP_SOURCES
 #     -checks=*;)
 message("Build Type: " ${CMAKE_BUILD_TYPE})
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-  message("Setting build to show FPS")
   add_compile_definitions(DEBUG)
 endif()
 
