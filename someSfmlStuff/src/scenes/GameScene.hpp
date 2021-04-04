@@ -16,6 +16,8 @@ private:
     DrawMode m_DrawMode;
     sf::Text m_Info;
 
+    std::string getInfo();
+
 public:
     GameScene(Window &window) : Scene("game"), m_Window(window), m_DrawMode(DrawMode::CIRCLE) {}
 

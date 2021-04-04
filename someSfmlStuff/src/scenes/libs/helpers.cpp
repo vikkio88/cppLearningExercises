@@ -68,3 +68,28 @@ void addLink(Shapes *shapes, Lines *lines)
         addLine(*lines, pos1, pos2);
     }
 }
+
+std::ostream &operator<<(std::ostream &stream, DrawMode drawMode)
+{
+
+    switch (drawMode)
+    {
+    case 0:
+    {
+
+        stream << "CIRCLE";
+        return stream;
+    }
+    case 1:
+    {
+
+        stream << "SQUARE";
+        return stream;
+    }
+
+    default:
+        break;
+    }
+
+    return stream;
+}

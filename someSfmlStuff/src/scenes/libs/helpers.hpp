@@ -2,14 +2,15 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
+using Shapes = std::vector<sf::Shape *>;
+using Lines = std::vector<sf::VertexArray *>;
 enum DrawMode
 {
     CIRCLE,
     SQUARE
 };
+std::ostream &operator<<(std::ostream &stream, DrawMode drawMode);
 
-using Shapes = std::vector<sf::Shape *>;
-using Lines = std::vector<sf::VertexArray *>;
 
 void handleEvent(sf::Event &event, sf::Vector2i &mousePos, DrawMode drawMode);
 void addNode(Shapes &shapes, sf::Vector2i clickPosition);
