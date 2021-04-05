@@ -3,7 +3,7 @@
 #include "scenes/SplashScreen.hpp"
 #include "scenes/GameScene.hpp"
 
-TestGame::TestGame(const std::string &name) : Game(name)
+TestGame::TestGame(const std::string &name) : Game(name, 1024, 600)
 {
     auto splash = std::make_shared<SplashScreen>(m_SceneManager);
     m_SceneManager.add(splash);

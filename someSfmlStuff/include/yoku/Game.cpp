@@ -13,7 +13,7 @@ namespace yoku
             auto dt = m_Clock.restart().asSeconds();
 #if FPS == 1
             m_Window.getRenderer().setTitle(
-                m_name + " -  FPS: " + std::to_string((1 / dt)));
+                m_Name + " -  FPS: " + std::to_string((1 / dt)));
 #endif
 
             auto event = m_Window.getEvent();

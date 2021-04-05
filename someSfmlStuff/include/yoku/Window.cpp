@@ -2,8 +2,8 @@
 
 namespace yoku
 {
-    Window::Window(const std::string &title, int widht, int height, sf::Uint32 style = sf::Style::Titlebar)
-        : m_Renderer(sf::VideoMode(800, 600), "Test", style)
+    Window::Window(const std::string &title, int width = 800, int height = 600, sf::Uint32 style = sf::Style::Titlebar)
+        : m_Renderer(sf::VideoMode(width, height), "Test", style)
     {
         m_Renderer.setVerticalSyncEnabled(true);
     }
