@@ -12,9 +12,11 @@ private:
     yoku::SceneManager &m_SceneManager;
     bool m_EnterPressed = false;
     sf::Text title;
+    int m_W;
+    int m_H;
 
 public:
-    SplashScreen(yoku::SceneManager &sceneManager) : Scene("splashScreen"), m_SceneManager(sceneManager) {}
+    SplashScreen(yoku::SceneManager &sceneManager, int width, int height) : Scene("splashScreen"), m_SceneManager(sceneManager), m_W(width), m_H(height) {}
     void onCreate() override;
     void onDestroy() override;
 

@@ -16,7 +16,7 @@ void SplashScreen::onCreate()
     title.setCharacterSize(24);
     title.setFillColor(sf::Color::White);
     title.setOrigin(title.getLocalBounds().width / 2, title.getLocalBounds().height / 2);
-    title.setPosition(400, 300);
+    title.setPosition(m_W / 2, m_H / 2);
 }
 void SplashScreen::onDestroy()
 {
