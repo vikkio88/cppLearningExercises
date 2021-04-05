@@ -44,6 +44,7 @@ void GameScene::onDestroy()
 
 void GameScene::onActivate()
 {
+    m_Window.setBgColour(sf::Color(33, 33, 33));
     std::cout << "activating " << m_Name << std::endl;
 }
 void GameScene::onDeactivate()
