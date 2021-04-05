@@ -25,6 +25,15 @@ void addNode(Shapes &shapes, sf::Vector2i clickPosition, DrawMode drawMode)
     shapes.push_back(node);
 }
 
+void removeNode(Shapes &shapes)
+{
+    if (shapes.size() < 1)
+        return;
+    auto shape = shapes.back();
+    delete shape;
+    shapes.pop_back();
+}
+
 void addLine(Lines &lines, sf::Vector2f p1, sf::Vector2f p2)
 {
     auto line = new sf::VertexArray(sf::LinesStrip, 2);
@@ -47,7 +56,24 @@ bool handleEvent(sf::Event &event, sf::Vector2i &mousePos, DrawMode drawMode)
         return true;
     }
 
+    if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Backspace)
+    {
+        auto shapes = GameState::getInstance()->shapes;
+        auto lines = GameState::getInstance()->lines;
+        removeNode(*shapes);
+        removeLink(*lines);
+        return true;
+    }
     return false;
+}
+
+void removeLink(Lines& lines)
+{
+    if (lines.size() < 1)
+        return;
+    auto shape = lines.back();
+    delete shape;
+    lines.pop_back();
 }
 
 void addLink(Shapes *shapes, Lines *lines)

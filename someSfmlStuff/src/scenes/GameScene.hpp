@@ -14,6 +14,7 @@ private:
     yoku::Window &m_Window;
     DrawMode m_DrawMode;
     sf::Text m_Info;
+    sf::Text m_Tutorial;
     bool m_hasChangedState = false;
 
     std::string getInfo();

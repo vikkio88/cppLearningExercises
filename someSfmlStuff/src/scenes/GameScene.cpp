@@ -30,6 +30,12 @@ void GameScene::onCreate()
     m_Info.setCharacterSize(10);
     m_Info.setFillColor(sf::Color::White);
     m_Info.setPosition(10, 10);
+
+    m_Tutorial.setFont(*font);
+    m_Tutorial.setString("Click -> Add Node\n[D] -> Change draw mode\n[Backspace] -> Delete last node");
+    m_Tutorial.setCharacterSize(10);
+    m_Tutorial.setFillColor(sf::Color::White);
+    m_Tutorial.setPosition(m_Window.getWidth() - m_Tutorial.getGlobalBounds().width, 10);
 }
 void GameScene::onDestroy()
 {
@@ -72,6 +78,7 @@ void GameScene::draw(yoku::Window &window)
     auto lines = *(GameState::getInstance()->lines);
 
     window.draw(m_Info);
+    window.draw(m_Tutorial);
     for (auto &s : shapes)
     {
         window.draw(*s);
