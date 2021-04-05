@@ -43,7 +43,7 @@ namespace yoku
 
     void Window::startDraw()
     {
-        m_Renderer.clear(sf::Color::Black);
+        m_Renderer.clear(m_BgColor);
     }
 
     void Window::draw(sf::Drawable &drawable)
