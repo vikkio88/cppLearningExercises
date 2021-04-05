@@ -1,7 +1,9 @@
 #include "GameScene.hpp"
-#include "Assets.hpp"
+
 #include "state/GameState.hpp"
 #include "libs/helpers.hpp"
+
+#include "yoku/Assets.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -22,7 +24,7 @@ std::string GameScene::getInfo()
 void GameScene::onCreate()
 {
     std::cout << "creating " << m_Name << std::endl;
-    auto font = Assets::getInstance()->loadFont("callingcode");
+    auto font = yoku::Assets::getInstance()->loadFont("callingcode");
     m_Info.setFont(*font);
     m_Info.setString(getInfo());
     m_Info.setCharacterSize(10);
@@ -64,7 +66,7 @@ void GameScene::update(float dt)
     }
 }
 
-void GameScene::draw(Window &window)
+void GameScene::draw(yoku::Window &window)
 {
     auto shapes = *(GameState::getInstance()->shapes);
     auto lines = *(GameState::getInstance()->lines);

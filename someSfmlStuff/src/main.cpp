@@ -1,12 +1,11 @@
 #include <iostream>
 #include <vector>
 
-#include "Game.hpp"
+#include "TestGame.hpp"
 
 int main()
 {
-
-    Game game("Test");
+    TestGame game("Test Game");
     game.run();
 
     return EXIT_SUCCESS;

@@ -12,15 +12,22 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
 # the -I flag in compiler
 include_directories(
-  ${PROJECT_SOURCE_DIR}/src/include/
-) 
+  ${PROJECT_SOURCE_DIR}/include/
+)
+
+
+set(YOKU_LIB_SOURCES 
+  include/yoku/Assets.cpp
+  include/yoku/SceneManager.cpp
+  include/yoku/Window.cpp
+  include/yoku/Game.cpp
+)
+set(YOKU_LIBRARY_NAME yoku)
+add_library(${YOKU_LIBRARY_NAME} STATIC ${YOKU_LIB_SOURCES})
 
 set(APP_SOURCES 
   src/main.cpp
-  src/Assets.cpp
-  src/SceneManager.cpp
-  src/Window.cpp
-  src/Game.cpp
+  src/TestGame.cpp
   src/scenes/GameScene.cpp
   src/scenes/SplashScreen.cpp
   src/scenes/state/GameState.cpp
@@ -33,13 +40,16 @@ set(APP_SOURCES
 #     clang-tidy;
 #     -header-filter=.;
 #     -checks=*;)
+
+
+#add_compile_definitions(FPS=1)
 message("Build Type: " ${CMAKE_BUILD_TYPE})
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_compile_definitions(DEBUG)
 endif()
 
-file(COPY assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-
+# copying assets
+file(COPY src/assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 # creates ./build/bin/someStuff
 add_executable(${PROJECT_NAME} ${APP_SOURCES})
-target_link_libraries(${PROJECT_NAME} sfml-audio sfml-graphics sfml-window sfml-system)
+target_link_libraries(${PROJECT_NAME} sfml-audio sfml-graphics sfml-window sfml-system ${YOKU_LIBRARY_NAME})

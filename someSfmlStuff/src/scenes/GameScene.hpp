@@ -1,18 +1,17 @@
 #pragma once
 
-#include "Scene.hpp"
-#include "Window.hpp"
+#include "yoku/Scene.hpp"
+#include "yoku/Window.hpp"
+
 #include "libs/helpers.hpp"
 
 #include <SFML/Graphics.hpp>
 #include <memory>
 
-
-
-class GameScene : public Scene
+class GameScene : public yoku::Scene
 {
 private:
-    Window &m_Window;
+    yoku::Window &m_Window;
     DrawMode m_DrawMode;
     sf::Text m_Info;
     bool m_hasChangedState = false;
@@ -20,7 +19,7 @@ private:
     std::string getInfo();
 
 public:
-    GameScene(Window &window) : Scene("game"), m_Window(window), m_DrawMode(DrawMode::CIRCLE) {}
+    GameScene(yoku::Window &window) : Scene("game"), m_Window(window), m_DrawMode(DrawMode::CIRCLE) {}
 
     virtual void onCreate() override;
     virtual void onDestroy() override;
@@ -29,5 +28,5 @@ public:
 
     void processInput(sf::Event &event) override;
     void update(float dt) override;
-    void draw(Window &window) override;
+    void draw(yoku::Window &window) override;
 };

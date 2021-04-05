@@ -1,7 +1,7 @@
 #include "SplashScreen.hpp"
-#include "Window.hpp"
-#include "Assets.hpp"
 
+#include "yoku/Window.hpp"
+#include "yoku/Assets.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <memory>
@@ -10,7 +10,7 @@ void SplashScreen::onCreate()
 {
     std::cout << "creating " << m_Name << std::endl;
 
-    auto font = Assets::getInstance()->loadFont("callingcode");
+    auto font = yoku::Assets::getInstance()->loadFont("callingcode");
     title.setFont(*font);
     title.setString("Press [ENTER] to start");
     title.setCharacterSize(24);
@@ -44,7 +44,7 @@ void SplashScreen::update(float dt)
         m_SceneManager.switchTo("game");
     }
 }
-void SplashScreen::draw(Window &window)
+void SplashScreen::draw(yoku::Window &window)
 {
     window.draw(title);
 }
