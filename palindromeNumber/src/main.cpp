@@ -1,19 +1,15 @@
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 
 bool isPalindrome(int number)
 {
     std::stringstream ss;
     ss << number;
-    std::string num, revNum;
-    ss >> num;
-
-    for (int i = num.length() - 1; i >= 0; i--)
-    {
-        revNum += num[i];
-    }
-
-    return revNum == num;
+    std::string num = ss.str();
+    std::string reversed = ss.str();
+    std::reverse(reversed.begin(), reversed.end());
+    return reversed == num;
 }
 
 int main()
