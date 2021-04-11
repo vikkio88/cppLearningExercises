@@ -1,9 +1,9 @@
 #include <iostream>
 #define GLEW_STATIC
+#include <GL/glew.h>
 
 #include <SFML/Graphics.hpp>
-
-#include <GL/glew.h>
+#include <SFML/OpenGL.hpp>
 
 const GLint WIDTH = 800, HEIGHT = 600;
 
@@ -20,11 +20,17 @@ int main()
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "GlewTest", sf::Style::Titlebar, settings);
     glewExperimental = GL_TRUE;
 
+    window.setActive(true);
+
     if (glewInit() != GLEW_OK)
     {
         std::cout << "Problems initialising GLEW/OPENGL\n";
         return EXIT_FAILURE;
     }
+
+    glViewport(0, 0, WIDTH, HEIGHT);
+    glMatrixMode(GL_PROJECTION);
+
     while (window.isOpen())
     {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
@@ -32,9 +38,16 @@ int main()
             window.close();
         }
 
-        glClearColor(0.1f, 0.2f, 0.3f, .9f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClearColor(.3f, .2f, .5f, .9f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glColor3f(0.0f, 0.0f, 1.0f);
 
+        glBegin(GL_LINE_LOOP);
+        glVertex3f(-1.0f, 0.0f, 0.0f);
+        glVertex3f(0.0f, -1.0f, 0.0f);
+        glVertex3f(1.0f, 0.0f, 0.0f);
+        glVertex3f(0.0f, 1.0f, 0.0f);
+        glEnd();
         window.display();
     }
 
