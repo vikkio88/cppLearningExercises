@@ -3,6 +3,9 @@
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
 
+#include <iostream>
+#include <algorithm>
+
 const uint32_t WIDTH = 800, HEIGHT = 600;
 
 Game::Game() {}
@@ -57,6 +60,28 @@ void Game::createVulkanInstance()
     if (vkCreateInstance(&createInfo, nullptr, &m_vkInstance) != VK_SUCCESS)
     {
         throw std::runtime_error("failed to create instance!");
+    }
+
+    // Getting extensions
+    uint32_t extensionCount = 0;
+    vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
+    std::vector<VkExtensionProperties> extensions(extensionCount);
+    vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, extensions.data());
+
+    std::cout << "glfw required extensions:\n";
+    for (size_t i = 0; i < glfwExtensionCount; i++)
+    {
+        auto currentExt = glfwExtensions[i];
+        std::cout << '\t' << currentExt << '\n';
+        auto result = std::find_if(
+            extensions.begin(),
+            extensions.end(),
+            [&currentExt](auto &ext) { return ext.extensionName == currentExt; });
+
+        if (result != extensions.end())
+            std::cout << "\t\tnot found!\n";
+        else
+            std::cout << "\t\tsupported\n";
     }
 }
 
