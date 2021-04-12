@@ -2,15 +2,20 @@
 
 #define GLFW_INCLUDE_VULKAN
 #include <GLFW/glfw3.h>
+#include <vulkan/vulkan.hpp>
 
 class Game
 {
 private:
     GLFWwindow *m_window;
-    void initWindow();
-    void initVulkan();
-    void mainLoop();
+    VkInstance m_vkInstance;
 
+    void initWindow();
+
+    void createVulkanInstance();
+    void initVulkan();
+
+    void mainLoop();
     void cleanup();
 
 public:
