@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include "Vec3.hpp"
+
 /*
 PPM files style
 # P3 <- start with this
@@ -23,15 +25,11 @@ int main()
         std::cerr << "\rScanlines remaining: " << j << ' ' << std::flush;
         for (int i = 0; i < WIDTH; ++i)
         {
-            auto r = double(i) / (WIDTH - 1);
-            auto g = double(j) / (HEIGHT - 1);
-            auto b = 0.25;
-
-            int ir = static_cast<int>(255.999 * r);
-            int ig = static_cast<int>(255.999 * g);
-            int ib = static_cast<int>(255.999 * b);
-
-            std::cout << ir << ' ' << ig << ' ' << ib << '\n';
+            colour c(
+                double(i) / (WIDTH - 1),
+                double(j) / (HEIGHT - 1),
+                .25);
+            printColour(std::cout, c);
         }
     }
     std::cerr << "\n\tCompleted\n\n";
