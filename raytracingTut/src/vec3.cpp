@@ -1,4 +1,4 @@
-#include "Vec3.hpp"
+#include "vec3.hpp"
 
 vec3 vec3::operator-() const
 {

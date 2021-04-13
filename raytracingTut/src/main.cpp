@@ -1,6 +1,7 @@
 #include <iostream>
 
-#include "Vec3.hpp"
+#include "vec3.hpp"
+#include "ray.hpp"
 
 /*
 PPM files style
@@ -14,21 +15,52 @@ P3
 0 255 0  0 255 0  0 255 0 
 */
 
+void printColour(std::ostream &out, colour &col)
+{
+    out << static_cast<int>(255.999 * col.x()) << ' '
+        << static_cast<int>(255.999 * col.y()) << ' '
+        << static_cast<int>(255.999 * col.z())
+        << '\n';
+}
+
+colour rayColour(const ray &r)
+{
+    vec3 uDirection = unit_vector(r.direction());
+    auto t = .5 * (uDirection.y() + 1.0);
+    return (1. - t) * colour(1., 1., 1.) + t * colour(.5, .7, 1.);
+}
+
 int main()
 {
-    const int WIDTH = 1000;
-    const int HEIGHT = 1000;
+    // Img setup
+    const auto ratio = 16.0 / 9.;
+    const int width = 600;
+    const int height = static_cast<int>(width / ratio);
+
+    // Camera setup
+    auto viewportHeight = 2.;
+    auto viewportWidth = ratio * viewportHeight;
+    auto focalLength = 1.;
+
+    auto origin = point3();
+    auto horizontal = vec3(viewportWidth, 0, 0);
+    auto vertical = vec3(0, viewportHeight, 0);
+
+    auto lowerLeft = origin - (horizontal / 2) - (vertical / 2) - vec3(0, 0, focalLength);
+
+    // Rendering
     std::cout << "P3\n"
-              << WIDTH << ' ' << HEIGHT << "\n255\n";
-    for (int j = HEIGHT - 1; j >= 0; --j)
+              << width << ' ' << height << "\n255\n";
+    for (int j = height - 1; j >= 0; --j)
     {
         std::cerr << "\rScanlines remaining: " << j << ' ' << std::flush;
-        for (int i = 0; i < WIDTH; ++i)
+        for (int i = 0; i < width; ++i)
         {
-            colour c(
-                double(i) / (WIDTH - 1),
-                double(j) / (HEIGHT - 1),
-                .25);
+            auto u = double(i) / (width - 1);
+            auto v = double(i) / (height - 1);
+
+            ray r(origin, lowerLeft + u * horizontal + v * vertical - origin);
+            colour c = rayColour(r);
             printColour(std::cout, c);
         }
     }

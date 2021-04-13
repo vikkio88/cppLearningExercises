@@ -7,6 +7,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
 set(APP_SOURCES 
   src/main.cpp
+  src/vec3.cpp
+  src/ray.cpp
 )
 
 # creates ./build/bin/rayT

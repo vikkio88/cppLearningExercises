@@ -83,11 +83,3 @@ inline vec3 unit_vector(vec3 v)
 {
     return v / v.length();
 }
-
-void printColour(std::ostream &out, colour &col)
-{
-    out << static_cast<int>(255.999 * col.x()) << ' '
-        << static_cast<int>(255.999 * col.y()) << ' '
-        << static_cast<int>(255.999 * col.z())
-        << '\n';
-}
