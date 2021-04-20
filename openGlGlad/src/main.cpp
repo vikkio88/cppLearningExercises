@@ -41,6 +41,16 @@ int main()
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(&messageCallback, 0);
 
+    auto sources = loadShaderSources("triangle");
+
+    // defining the vertex shader code
+    unsigned int vertexShader = createShader(ShaderType::Vertex, sources.vertex);
+    // defining the fragment shader code
+    unsigned int fragmentShader = createShader(ShaderType::Fragment, sources.fragment);
+
+    //creating program
+    unsigned int shaderProgram = createProgram(vertexShader, fragmentShader);
+
     //shaders
     float vertices[] = {
         -0.5f, -0.5f, 0.0f,
@@ -56,38 +66,12 @@ int main()
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
     glEnableVertexAttribArray(0);
 
-    auto sources = load("triangle");
-
-    // defining the vertex shader code
-    unsigned int vertexShader = createShader(ShaderType::Vertex, sources.vertex);
-
-    // defining the fragment shader code
-    unsigned int fragmentShader = createShader(ShaderType::Fragment, sources.fragment);
-
-    //creating program
-    unsigned int shaderProgram;
-    shaderProgram = glCreateProgram();
-    //linking our shaders
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    glLinkProgram(shaderProgram);
-    int success;
-    char infoLog[512];
-    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-    if (!success)
-    {
-        glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-        std::cout << "ERROR::SHADER::PROGRAM::LINKING_FAILED\n"
-                  << infoLog << std::endl;
-        return EXIT_FAILURE;
-    }
-
     unsigned int vao = 0;
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 
     //LOOP
     while (!glfwWindowShouldClose(window))

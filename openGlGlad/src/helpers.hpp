@@ -11,14 +11,16 @@ struct ShaderSource
     std::string fragment;
 };
 
-enum class ShaderType
+enum ShaderType
 {
-    Vertex = GL_VERTEX_SHADER,
-    Fragment = GL_FRAGMENT_SHADER
+    Vertex = 0,
+    Fragment = 1
 };
+constexpr GLenum shaderTypesMap[] = {GL_VERTEX_SHADER, GL_FRAGMENT_SHADER};
 
 void messageCallback(GLenum source, GLenum type, unsigned int x, unsigned int y, int z, const char *a, const void *b);
 void framebufferSizeCallback(GLFWwindow *window, int width, int height);
 
-ShaderSource load(const std::string &name);
+ShaderSource loadShaderSources(const std::string &name);
 unsigned int createShader(ShaderType type, const std::string &source);
+unsigned int createProgram(unsigned int vertexShader, unsigned int fragmentShader);
