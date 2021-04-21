@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <cmath>
 
 #include "helpers.hpp"
 
@@ -86,9 +87,14 @@ int main()
     {
         processInput(window);
 
-        glClearColor(.8f, .5f, .3f, 1.f);
+        glClearColor(.1f, .1f, .1f, 1.f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        float timeValue = glfwGetTime();
+        float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
+        int vertexColorLocation = glGetUniformLocation(shaderProgram, "myColour");
+        glUseProgram(shaderProgram);
+        glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
         //using the program
         glUseProgram(shaderProgram);
         glBindVertexArray(vao);
