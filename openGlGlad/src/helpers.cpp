@@ -88,5 +88,9 @@ unsigned int createProgram(unsigned int vertexShader, unsigned int fragmentShade
         return 0;
     }
 
+    // removing shaders after linking
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+
     return shaderProgram;
 }

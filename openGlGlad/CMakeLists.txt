@@ -13,7 +13,7 @@ set(APP_SOURCES
   src/helpers.cpp
 )
 
-file(COPY assets DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+execute_process(COMMAND cp -r assets/ ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/assets WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})
 # creates ./build/bin/testOGL
 add_executable(${PROJECT_NAME} ${APP_SOURCES})
 # dl pthread X11 Xxf86vm Xrandr Xi

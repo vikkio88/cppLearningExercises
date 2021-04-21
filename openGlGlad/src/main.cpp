@@ -53,9 +53,17 @@ int main()
 
     //shaders
     float vertices[] = {
-        -0.5f, -0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        0.0f, 0.5f, 0.0f};
+        // position //colour
+        -0.5f,
+        -0.5f,
+        0.0f,
+        0.5f,
+        -0.5f,
+        0.0f,
+        0.0f,
+        0.5f,
+        0.0f,
+    };
 
     //creating vertex buffer object
     unsigned int VBO;
@@ -90,10 +98,6 @@ int main()
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-
-    // removing shaders
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
 
     // clearing up window
     glfwDestroyWindow(window);
