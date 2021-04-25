@@ -59,7 +59,7 @@ int main()
         -0.5f,
         -0.5f,
         0.0f,
-        // colours
+        // colours RED
         1.0f,
         0.f,
         0.f,
@@ -69,7 +69,7 @@ int main()
         0.5f,
         -0.5f,
         0.0f,
-        // colour
+        // colour GREEN
         0.f,
         1.f,
         0.f,
@@ -79,10 +79,40 @@ int main()
         0.0f,
         0.5f,
         0.0f,
-        // colour
+        // colour BLUE
         0.f,
         0.f,
         1.f,
+
+        // V1T1
+        // pos
+        0.0f,
+        0.5f,
+        0.0f,
+        // colour
+        1.0f,
+        0.f,
+        0.f,
+
+        // V2T1
+        // pos
+        0.5f,
+        -0.5f,
+        0.0f,
+        // colour
+        1.f,
+        0.f,
+        0.f,
+
+        // V3T1
+        // pos
+        0.5f,
+        0.5f,
+        0.0f,
+        // colour
+        1.f,
+        0.f,
+        0.f,
     };
 
     // data
@@ -125,7 +155,7 @@ int main()
         glUseProgram(shaderProgram);
         glBindVertexArray(vertexArrayObject);
         // draw points 0-3 from the currently bound VAO with current in-use shader
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
