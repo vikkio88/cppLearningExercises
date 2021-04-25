@@ -84,25 +84,8 @@ int main()
         0.f,
         1.f,
 
-        // V1T1
-        // pos
-        0.0f,
-        0.5f,
-        0.0f,
-        // colour
-        1.0f,
-        0.f,
-        0.f,
-
-        // V2T1
-        // pos
-        0.5f,
-        -0.5f,
-        0.0f,
-        // colour
-        1.f,
-        0.f,
-        0.f,
+        //v1t1 -> v3
+        //v2t1 -> v2
 
         // V3T1
         // pos
@@ -113,7 +96,20 @@ int main()
         1.f,
         0.f,
         0.f,
+
+        //v1t2 -> v3
+        //v2t2 -> v1
+        //v3t2
+        -0.5f,
+        0.5f,
+        0.0f,
+        //col
+        0.f,
+        1.f,
+        0.f,
     };
+
+    GLuint indices[] = {0, 1, 2, 2, 1, 3, 2, 0, 4};
 
     // data
     // X Y Z     R G B
@@ -143,6 +139,12 @@ int main()
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GL_FLOAT), (GLvoid *)(sizeof(GLfloat) * 3));
     glEnableVertexAttribArray(1);
 
+    // index buffer object creation using indices
+    unsigned int indexBufferObject;
+    glGenBuffers(1, &indexBufferObject);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferObject);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
     //LOOP
     while (!glfwWindowShouldClose(window))
     {
@@ -155,7 +157,7 @@ int main()
         glUseProgram(shaderProgram);
         glBindVertexArray(vertexArrayObject);
         // draw points 0-3 from the currently bound VAO with current in-use shader
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
