@@ -54,33 +54,64 @@ int main()
 
     //shaders
     float vertices[] = {
-        // position //colour
+        // V1
+        // pos
         -0.5f,
         -0.5f,
         0.0f,
+        // colours
+        1.0f,
+        0.f,
+        0.f,
+
+        // V2
+        // pos
         0.5f,
         -0.5f,
         0.0f,
+        // colour
+        0.f,
+        1.f,
+        0.f,
+
+        // V3
+        // pos
         0.0f,
         0.5f,
         0.0f,
+        // colour
+        0.f,
+        0.f,
+        1.f,
     };
 
-    //creating vertex buffer object
-    unsigned int VBO;
-    glGenBuffers(1, &VBO);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    // pushing data so shaders can use it
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *)0);
-    glEnableVertexAttribArray(0);
+    // data
+    // X Y Z     R G B
+    // <-- stride -->
+    // distance between each attrib
+    // offset -->
+    // offset is 0 for pos, 3 * float for colour
 
-    unsigned int vao = 0;
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
+    //creating vertex buffer object
+    unsigned int vertexBufferObject;
+    unsigned int vertexArrayObject = 0;
+
+    glGenBuffers(1, &vertexBufferObject);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferObject);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glGenVertexArrays(1, &vertexArrayObject);
+    glBindVertexArray(vertexArrayObject);
+
+    // position data
+    // stride = 6 * GLFloat
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GL_FLOAT), nullptr);
     glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+    // colours
+    // stride as pos, but offset (initial offset is 3 * float, since is after the pos)
+    // and for some reason needs to be a void*
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GL_FLOAT), (GLvoid *)(sizeof(GLfloat) * 3));
+    glEnableVertexAttribArray(1);
 
     //LOOP
     while (!glfwWindowShouldClose(window))
@@ -89,15 +120,10 @@ int main()
 
         glClearColor(.1f, .1f, .1f, 1.f);
         glClear(GL_COLOR_BUFFER_BIT);
-
-        float timeValue = glfwGetTime();
-        float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
-        int vertexColorLocation = glGetUniformLocation(shaderProgram, "myColour");
         glUseProgram(shaderProgram);
-        glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
         //using the program
         glUseProgram(shaderProgram);
-        glBindVertexArray(vao);
+        glBindVertexArray(vertexArrayObject);
         // draw points 0-3 from the currently bound VAO with current in-use shader
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
