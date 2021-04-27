@@ -7,5 +7,7 @@ out vec3 vertCol;
 void main()
 {
    vertCol = vCol;
-   gl_Position = vec4(vPos.x, vPos.y, vPos.z, 1.0);
+   //gl_Position = vec4(vPos.x, vPos.y, vPos.z, 1.0);
+   // swizzling            ↑ we get this ↓
+   gl_Position = vec4(vPos.xyz, 1.0);
 }
