@@ -21,3 +21,6 @@ add_executable(${PROJECT_NAME} ${APP_SOURCES})
 # removed: glad
 target_link_libraries(${PROJECT_NAME} GL glfw glad dl pthread)
 
+
+
+add_executable(testGLM src/testGlm.cpp)
