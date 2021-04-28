@@ -6,6 +6,7 @@
 #include <cmath>
 
 #include "helpers.hpp"
+#include "Shader.hpp"
 
 void processInput(GLFWwindow *window);
 
@@ -41,16 +42,6 @@ int main()
 
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(&messageCallback, 0);
-
-    auto sources = loadShaderSources("triangle");
-
-    // defining the vertex shader code
-    unsigned int vertexShader = createShader(ShaderType::Vertex, sources.vertex);
-    // defining the fragment shader code
-    unsigned int fragmentShader = createShader(ShaderType::Fragment, sources.fragment);
-
-    //creating program
-    unsigned int shaderProgram = createProgram(vertexShader, fragmentShader);
 
     //shaders
     float vertices[] = {
@@ -145,6 +136,8 @@ int main()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferObject);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
+    Shader triangle("triangle");
+
     //LOOP
     while (!glfwWindowShouldClose(window))
     {
@@ -152,9 +145,8 @@ int main()
 
         glClearColor(.1f, .1f, .1f, 1.f);
         glClear(GL_COLOR_BUFFER_BIT);
-        glUseProgram(shaderProgram);
         //using the program
-        glUseProgram(shaderProgram);
+        triangle.use();
         glBindVertexArray(vertexArrayObject);
         // draw points 0-3 from the currently bound VAO with current in-use shader
         glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);

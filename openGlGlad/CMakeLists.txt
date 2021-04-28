@@ -10,6 +10,7 @@ include_directories(${PROJECT_SOURCE_DIR}/deps/)
 add_subdirectory(deps/glad)
 set(APP_SOURCES 
   src/main.cpp
+  src/Shader.cpp
   src/helpers.cpp
 )
 
