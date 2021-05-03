@@ -10,8 +10,9 @@ include_directories(${PROJECT_SOURCE_DIR}/deps/)
 add_subdirectory(deps/glad)
 set(APP_SOURCES 
   src/main.cpp
+  src/Window.cpp
+  src/App.cpp
   src/Shader.cpp
-  src/helpers.cpp
 )
 
 execute_process(COMMAND cp -r assets/ ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/assets WORKING_DIRECTORY ${PROJECT_SOURCE_DIR})

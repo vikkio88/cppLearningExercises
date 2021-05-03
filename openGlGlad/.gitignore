@@ -4,3 +4,5 @@ build/*
 
 # dont want to commit glm 420 files
 deps/glm/
+deps/stb/
+!deps/stb/.gitkeep
