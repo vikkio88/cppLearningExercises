@@ -1,5 +1,8 @@
 #include "App.hpp"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb/stb_image.h"
+
 #include <iostream>
 
 void messageCallback(GLenum source, GLenum type, unsigned int x, unsigned int y, int z, const char *a, const void *b)
@@ -37,6 +40,8 @@ void App::init()
         1.0f,
         0.f,
         0.f,
+        // text coord
+        1.0f, 1.0f,
 
         // V2
         // pos
@@ -47,6 +52,8 @@ void App::init()
         0.f,
         1.f,
         0.f,
+        // text coord
+        1.0f, 0.0f,
 
         // V3
         // pos
@@ -57,6 +64,8 @@ void App::init()
         0.f,
         0.f,
         1.f,
+        // text coord
+        0.0f, 0.0f,
 
         //v1t1 -> v3
         //v2t1 -> v2
@@ -70,6 +79,8 @@ void App::init()
         1.f,
         0.f,
         0.f,
+        // text coord
+        1.0f, 1.0f,
 
         //v1t2 -> v3
         //v2t2 -> v1
@@ -81,6 +92,8 @@ void App::init()
         0.f,
         1.f,
         0.f,
+        // text coord
+        0.0f, 1.0f,
     };
 
     GLuint indices[] = {0, 1, 2, 2, 1, 3, 2, 0, 4};
@@ -105,13 +118,16 @@ void App::init()
 
     // position data
     // stride = 6 * GLFloat
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GL_FLOAT), nullptr);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), nullptr);
     glEnableVertexAttribArray(0);
     // colours
     // stride as pos, but offset (initial offset is 3 * float, since is after the pos)
     // and for some reason needs to be a void*
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GL_FLOAT), (GLvoid *)(sizeof(GLfloat) * 3));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), (GLvoid *)(sizeof(GLfloat) * 3));
     glEnableVertexAttribArray(1);
+    // texture coords
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GL_FLOAT), (GLvoid *)(sizeof(GLfloat) * 6));
+    glEnableVertexAttribArray(2);
 
     // index buffer object creation using indices
     unsigned int indexBufferObject;
@@ -119,6 +135,20 @@ void App::init()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferObject);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
+    // texture generation
+    int width, height, nrChannels;
+    unsigned char *data = stbi_load("assets/textures/wall.jpg", &width, &height, &nrChannels, 0);
+
+    unsigned int texture;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    stbi_image_free(data);
+    // this should be done after in draw ↓
+    glBindTexture(GL_TEXTURE_2D, texture);
+
+    //shader generation
     shader = std::make_unique<Shader>("triangle");
 }
 

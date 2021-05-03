@@ -5,9 +5,6 @@
 #include <iostream>
 #include <cmath>
 
-//#define STB_IMAGE_IMPLEMENTATION
-//#include "stb/stb_image.h"
-
 #include "App.hpp"
 
 void processInput(GLFWwindow *window);
